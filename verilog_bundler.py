@@ -38,14 +38,11 @@ def generate_fan_in(cvi,fname_inc):
     for el,wi in zip(cvi.elements,cvi.width):
         s = s + '   input [' + str(wi-1) + ':0] ' + el + ';\n'
     s = s + '\n'
-    s = s + 'assign ' + cvi.bundle_name + ' = \n'
-    s = s + '  {\n' 
-    s = s + '   {' + str(cvi.zero_pad_width) + '{1\'b0}},\n'
-    for el in cvi.elements:
-        s = s + '   ' + el + ',\n'
-    s = s[:-2] + '\n'
-    s = s + '  };\n\n'
-    s = s + 'endmodule\n'
+    
+    for el,start,stop in zip(cvi.elements,cvi.start_pos,cvi.stop_pos):
+        s = s + 'assign bundle[' + str(stop) + ':' + str(start) + '] = ' + el + ';\n'
+    s = s + 'assign bundle[' + str(cvi.bundle_width-1) + ':' + str(cvi.bundle_width-cvi.zero_pad_width) + '] = {' + str(cvi.zero_pad_width) + '{1\'b0}};\n'
+    s = s + '\n\nendmodule\n'
     return s
         
 def generate_inc(cvi): 
