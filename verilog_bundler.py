@@ -8,7 +8,7 @@ def generate_fan_out(cvi,fname_inc):
     s = ''
     s = s + 'module ' + cvi.bundle_name + '_fan_out\n'
     s = s + '  (\n'
-    s = s + '   ' + 'iface' + ',\n'
+    s = s + '   ' + 'bundle' + ',\n'
     for el in cvi.elements: 
         s = s + '   ' + el + ',\n'
     s = s[:-2] + '\n  );\n\n'
@@ -19,7 +19,7 @@ def generate_fan_out(cvi,fname_inc):
         s = s + '   output [' + str(wi-1) + ':0] ' + el + ';\n'
     s = s + '\n'
     for el,istart,istop in zip(cvi.elements,cvi.start_pos,cvi.stop_pos):
-        s = s + 'assign ' + el + ' = iface[' + str(istop) + ':' + str(istart) + '];\n'
+        s = s + 'assign ' + el + ' = bundle[' + str(istop) + ':' + str(istart) + '];\n'
     s = s + '\nendmodule\n'
     return s
 
@@ -28,13 +28,13 @@ def generate_fan_in(cvi,fname_inc):
     s = ''
     s = s + 'module ' + cvi.bundle_name + '_fan_in\n'
     s = s + '  (\n'
-    s = s + '   ' + 'iface' + ',\n'
+    s = s + '   ' + 'bundle' + ',\n'
     for el in cvi.elements: 
         s = s + '   ' + el + ',\n'
     s = s[:-2] + '\n  );\n\n'
     s = s + '`include \"' + fname_inc + '\"\n'
     s = s + '\n'
-    s = s + '   output [' + str(cvi.bundle_width-1) + ':0] ' + 'iface' + ';\n'
+    s = s + '   output [' + str(cvi.bundle_width-1) + ':0] ' + 'bundle' + ';\n'
     for el,wi in zip(cvi.elements,cvi.width):
         s = s + '   input [' + str(wi-1) + ':0] ' + el + ';\n'
     s = s + '\n'

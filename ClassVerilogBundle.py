@@ -1,6 +1,6 @@
 class ClassVerilogBundle:
     def __init__(self,bundle):
-        self.ifname = bundle['output']
+        self.bundle_name = bundle['output']
         self.min_width = bundle['min_width']
         self.elements = []
         self.width = []        
@@ -24,7 +24,7 @@ class ClassVerilogBundle:
         
         
     def printClass(self):
-        print('bundle_name = ',self.ifname)
+        print('bundle_name = ',self.bundle_name)
         print('min_width = ',self.min_width)
         print('elements = ',self.elements)
         print('width = ', self.width)
