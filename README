@@ -39,6 +39,10 @@ following structure:
     }
 ]
 
+Note that the utility automatically calculates the minimum width required for the
+bundle, but it can zero padded with the min_width attribute. If the total required
+argument size is greater than min_width, the utility will generate a warning. 
+
 Data Products: 
 The utility produces three verilog files
 <ifname>_inc.v     - localparams for component width and position

@@ -75,6 +75,7 @@ def generate_inc(cvi):
 def main():
     parser = argparse.ArgumentParser(description='Auto generate Verilog 2001 code to define bundle. Output files are written to the same location as the json file')
     parser.add_argument('--json',type=str,help='full path to json bundle defintion file')
+    parser.add_argument('--verbose',action="store_true",help='print contents of generated files',default=False)
     args = parser.parse_args()
     
     try:
@@ -96,7 +97,8 @@ def main():
     
     # Generate the include file
     s_inc = generate_inc(cvi)
-    print(s_inc)
+    if args.verbose: 
+        print(s_inc)
     fname_inc = cvi.bundle_name + '_inc.v'
     try:
         fout_inc = open(path + fname_inc,'w')
@@ -106,7 +108,8 @@ def main():
     
     # Generate the fan in file
     s_fan_in = generate_fan_in(cvi,fname_inc)
-    print(s_fan_in)
+    if args.verbose: 
+        print(s_fan_in)
     fname_fan_in = cvi.bundle_name + '_fan_in.v'
     try:
         fout_fan_in = open(path + fname_fan_in,'w')
@@ -116,7 +119,8 @@ def main():
     
     # Generate the fan out file
     s_fan_out = generate_fan_out(cvi,fname_inc)
-    print(s_fan_out)
+    if args.verbose: 
+        print(s_fan_out)
     fname_fan_out = cvi.bundle_name + '_fan_out.v'
     try:
         fout_fan_out = open(path + fname_fan_out,'w')
