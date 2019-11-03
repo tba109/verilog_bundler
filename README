@@ -1,0 +1,24 @@
+verilog_interface_generator
+Tyler Anderson
+Sat 11/02/2019_13:41:47.58
+
+Description: 
+A python utility for generating Verilog 2001 files for interface definitions. 
+
+Motivation: 
+One of the great shortcomings of Verilog 2001 is its lack of a generic interface
+feature--if a connection is added between two submodules in a hierarchy, it
+requires modifying every level of the connection. This utility provides a simple
+remedy to this problem by autogenerating collection of verilog modules and header
+files which fully describe and encapsulate the interface. 
+
+Interface definitions: 
+An interface <ifname> is defined in a JSON file: <ifname>.json. 
+
+Usage:
+
+Data Products: 
+The utility produces three verilog files
+<ifname>_inc.v     - localparams for component width and position
+<ifname>_fan_in.v  - instantiate this module at the point of composition                         
+<ifname>_fan_out.v - instantiate this module at the point of decomposition
