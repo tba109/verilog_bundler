@@ -41,7 +41,8 @@ def generate_fan_in(cvi,fname_inc):
     
     for el,start,stop in zip(cvi.elements,cvi.start_pos,cvi.stop_pos):
         s = s + 'assign bundle[' + str(stop) + ':' + str(start) + '] = ' + el + ';\n'
-    s = s + 'assign bundle[' + str(cvi.bundle_width-1) + ':' + str(cvi.bundle_width-cvi.zero_pad_width) + '] = {' + str(cvi.zero_pad_width) + '{1\'b0}};\n'
+    if(cvi.zero_pad_width != 0): 
+        s = s + 'assign bundle[' + str(cvi.bundle_width-1) + ':' + str(cvi.bundle_width-cvi.zero_pad_width) + '] = {' + str(cvi.zero_pad_width) + '{1\'b0}};\n'
     s = s + '\n\nendmodule\n'
     return s
         
